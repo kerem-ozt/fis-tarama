@@ -9,6 +9,13 @@ class ReceiptService {
 	static async getReceiptText(req, res) {
 		try {
 			const tempPath = req.file.path;
+			
+			let dir = './api/uploads';
+
+			if (!fs.existsSync(dir)){
+				fs.mkdirSync(dir, { recursive: true });
+			}
+
 			const targetPath = path.join(__dirname, `../uploads/image_${(new Date().toJSON()
 				.replace(/[-:]/g, '_')
 				.replace(/\./g, '_'))}.png`);
@@ -22,6 +29,7 @@ class ReceiptService {
 			const client = new vision.ImageAnnotatorClient();
 			const  [ result ] = await client.documentTextDetection(`${targetPath}`);
 			const fullTextAnnotation = result.fullTextAnnotation;
+			fs.unlinkSync(targetPath);
 			return fullTextAnnotation.text;
 		}
 		catch (err) {
@@ -32,6 +40,13 @@ class ReceiptService {
 	static async getReceiptTextWithConfidence(req, res) {
 		try {
 			const tempPath = req.file.path;
+
+			let dir = './api/uploads';
+
+			if (!fs.existsSync(dir)){
+				fs.mkdirSync(dir, { recursive: true });
+			}
+
 			const targetPath = path.join(__dirname, `../uploads/image_${(new Date().toJSON()
 				.replace(/[-:]/g, '_')
 				.replace(/\./g, '_'))}.png`);
@@ -60,6 +75,7 @@ class ReceiptService {
 					});
 				});
 			});
+			fs.unlinkSync(targetPath);
 			return receipt;
 		}
 		catch (err) {
@@ -70,6 +86,13 @@ class ReceiptService {
 	static async getReceiptSumPrice(req, res) {
 		try {
 			const tempPath = req.file.path;
+
+			let dir = './api/uploads';
+
+			if (!fs.existsSync(dir)){
+				fs.mkdirSync(dir, { recursive: true });
+			}
+			
 			const targetPath = path.join(__dirname, `../uploads/image_${(new Date().toJSON()
 				.replace(/[-:]/g, '_')
 				.replace(/\./g, '_'))}.png`);
@@ -158,6 +181,8 @@ class ReceiptService {
 			function getDifference(a, b) {
 				return (((a[0]-b[0]) + (a[1]-b[1]) + (a[2]-b[2]) + (a[3]-b[3])) / 4);
 			}
+
+			fs.unlinkSync(targetPath);
 
 			return receipt_sum;
 		}

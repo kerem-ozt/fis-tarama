@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 
 import ReceiptRouter from './routes/receipt';
 
-const port = 3000;
+// const port = 3000;
 const app = express();
 
 const expressSwagger = require('express-swagger-generator')(app);
@@ -51,8 +51,8 @@ expressSwagger(options);
 
 app.use('/receipt', ReceiptRouter);
 
-app.listen({port: 3000}, async () => {
-	console.log(`listening ${port}`);
+app.listen(process.env.PORT || 3000, async () => {
+	console.log('listening');
 });
 
 module.exports = app;
