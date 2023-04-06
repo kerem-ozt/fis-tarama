@@ -9,6 +9,13 @@ class ReceiptService {
 	static async getReceiptText(req, res) {
 		try {
 			const tempPath = req.file.path;
+			
+			let dir = './api/uploads';
+
+			if (!fs.existsSync(dir)){
+				fs.mkdirSync(dir, { recursive: true });
+			}
+
 			const targetPath = path.join(__dirname, `../uploads/image_${(new Date().toJSON()
 				.replace(/[-:]/g, '_')
 				.replace(/\./g, '_'))}.png`);
@@ -33,6 +40,13 @@ class ReceiptService {
 	static async getReceiptTextWithConfidence(req, res) {
 		try {
 			const tempPath = req.file.path;
+
+			let dir = './api/uploads';
+
+			if (!fs.existsSync(dir)){
+				fs.mkdirSync(dir, { recursive: true });
+			}
+
 			const targetPath = path.join(__dirname, `../uploads/image_${(new Date().toJSON()
 				.replace(/[-:]/g, '_')
 				.replace(/\./g, '_'))}.png`);
@@ -72,6 +86,13 @@ class ReceiptService {
 	static async getReceiptSumPrice(req, res) {
 		try {
 			const tempPath = req.file.path;
+
+			let dir = './api/uploads';
+
+			if (!fs.existsSync(dir)){
+				fs.mkdirSync(dir, { recursive: true });
+			}
+			
 			const targetPath = path.join(__dirname, `../uploads/image_${(new Date().toJSON()
 				.replace(/[-:]/g, '_')
 				.replace(/\./g, '_'))}.png`);
