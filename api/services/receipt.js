@@ -22,6 +22,7 @@ class ReceiptService {
 			const client = new vision.ImageAnnotatorClient();
 			const  [ result ] = await client.documentTextDetection(`${targetPath}`);
 			const fullTextAnnotation = result.fullTextAnnotation;
+			fs.unlinkSync(targetPath);
 			return fullTextAnnotation.text;
 		}
 		catch (err) {
@@ -60,6 +61,7 @@ class ReceiptService {
 					});
 				});
 			});
+			fs.unlinkSync(targetPath);
 			return receipt;
 		}
 		catch (err) {
@@ -158,6 +160,8 @@ class ReceiptService {
 			function getDifference(a, b) {
 				return (((a[0]-b[0]) + (a[1]-b[1]) + (a[2]-b[2]) + (a[3]-b[3])) / 4);
 			}
+
+			fs.unlinkSync(targetPath);
 
 			return receipt_sum;
 		}
