@@ -26,7 +26,11 @@ class ReceiptService {
 				}
 			});
 
-			const client = new vision.ImageAnnotatorClient();
+			const client = new vision.ImageAnnotatorClient(
+				{
+					keyFilename: '../../vision-api-key.json'
+				}
+			);
 			const  [ result ] = await client.documentTextDetection(`${targetPath}`);
 			const fullTextAnnotation = result.fullTextAnnotation;
 			fs.unlinkSync(targetPath);
@@ -57,7 +61,11 @@ class ReceiptService {
 				}
 			});
 
-			const client = new vision.ImageAnnotatorClient();
+			const client = new vision.ImageAnnotatorClient(
+				{
+					keyFilename: '../../vision-api-key.json'
+				}
+			);
 			const  [ result ] = await client.documentTextDetection(`${targetPath}`);
 			const fullTextAnnotation = result.fullTextAnnotation;
             
@@ -103,7 +111,11 @@ class ReceiptService {
 				}
 			});
 
-			const client = new vision.ImageAnnotatorClient();
+			const client = new vision.ImageAnnotatorClient(
+				{
+					keyFilename: '../../vision-api-key.json'
+				}
+			);
 			const  [ result ] = await client.documentTextDetection(`${targetPath}`);
 			const fullTextAnnotation = result.fullTextAnnotation;
 
