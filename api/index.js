@@ -17,7 +17,7 @@ let options = {
 			title: 'Customer - Order - Item',
 			version: '1.0.0'
 		},
-		host: 'localhost:3000',
+		host: 'fis-deploy.herokuapp.com',
 		basePath: '',
 		produces: [
 			'application/json',

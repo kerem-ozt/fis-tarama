@@ -3,6 +3,7 @@ const vision = require('@google-cloud/vision');
 const path = require('path');
 const multer = require('multer');
 import fs from 'fs';
+const APP_ROOT = path.join(__dirname, '../..');
 
 class ReceiptService {
 
@@ -26,7 +27,11 @@ class ReceiptService {
 				}
 			});
 
-			const client = new vision.ImageAnnotatorClient();
+			const client = new vision.ImageAnnotatorClient(
+				{
+					keyFilename: `${APP_ROOT}${path.sep}vision-api-key.json`
+				}
+			);
 			const  [ result ] = await client.documentTextDetection(`${targetPath}`);
 			const fullTextAnnotation = result.fullTextAnnotation;
 			fs.unlinkSync(targetPath);
@@ -57,7 +62,11 @@ class ReceiptService {
 				}
 			});
 
-			const client = new vision.ImageAnnotatorClient();
+			const client = new vision.ImageAnnotatorClient(
+				{
+					keyFilename: `${APP_ROOT}${path.sep}vision-api-key.json`
+				}
+			);
 			const  [ result ] = await client.documentTextDetection(`${targetPath}`);
 			const fullTextAnnotation = result.fullTextAnnotation;
             
@@ -103,7 +112,11 @@ class ReceiptService {
 				}
 			});
 
-			const client = new vision.ImageAnnotatorClient();
+			const client = new vision.ImageAnnotatorClient(
+				{
+					keyFilename: `${APP_ROOT}${path.sep}vision-api-key.json`
+				}
+			);
 			const  [ result ] = await client.documentTextDetection(`${targetPath}`);
 			const fullTextAnnotation = result.fullTextAnnotation;
 
