@@ -9,6 +9,6 @@ const ReceiptRouter = express.Router();
 // ReceiptRouter.post('/getReceiptText', upload.single('image'), ReceiptController.getReceiptText);
 // // eslint-disable-next-line max-len
 // ReceiptRouter.post('/getReceiptTextWithConfidence', upload.single('image'), ReceiptController.getReceiptTextWithConfidence);
-ReceiptRouter.post('/getReceiptSumPrice', Upload.single('image'), ReceiptController.getReceiptSumPrice);
+ReceiptRouter.post('/getReceiptSumPrice', ReceiptController.getReceiptSumPrice);
 
 export default ReceiptRouter;

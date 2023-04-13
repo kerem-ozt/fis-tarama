@@ -95,17 +95,30 @@ class ReceiptService {
 
 	static async getReceiptSumPrice(req, res) {
 		try {
+			var base64Data = req.body.base64.replace(/^data:image\/png;base64,/, "");
+			const filename = (new Date() / 1000).toFixed(0).toString();
 
-			console.log("file", req);
-			console.log("file", req.file);
+			const targetPath = `${APP_ROOT}/api/uploads/`;
+
+			const filePath = `${targetPath}${filename}.png`;
+
+			if (!fs.existsSync(targetPath)) {
+				fs.mkdirSync(targetPath, { recursive: true })
+			}
+
+			fs.writeFile(`${targetPath}${filename}.png`, base64Data, 'base64', function(err) {
+				if (err) {
+					return err;
+				}
+			});
+
 			const client = new vision.ImageAnnotatorClient(
 				{
 					keyFilename: `${APP_ROOT}${path.sep}vision-api-key.json`
 				}
 			);
 
-			const targetPath = `${APP_ROOT}/api/uploads/${req.file.name}`;
-			const  [ result ] = await client.documentTextDetection(targetPath);
+			const  [ result ] = await client.documentTextDetection(filePath);
 			const fullTextAnnotation = result.fullTextAnnotation;
 
 			let sum_vertices = [];
@@ -236,7 +249,7 @@ class ReceiptService {
 				});
 			});
 
-			// fs.unlinkSync(targetPath);
+			fs.unlinkSync(filePath);
 			
 			if (kdv_vertices_flag) {
 				return {receipt_sum};
