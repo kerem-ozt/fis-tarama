@@ -96,6 +96,8 @@ class ReceiptService {
 	static async getReceiptSumPrice(req, res) {
 		try {
 
+			console.log("file", req);
+			console.log("file", req.file);
 			const client = new vision.ImageAnnotatorClient(
 				{
 					keyFilename: `${APP_ROOT}${path.sep}vision-api-key.json`
