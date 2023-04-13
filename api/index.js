@@ -8,6 +8,7 @@ const app = express();
 
 const expressSwagger = require('express-swagger-generator')(app);
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 let options = {
