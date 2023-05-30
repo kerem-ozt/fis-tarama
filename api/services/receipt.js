@@ -333,7 +333,7 @@ class ReceiptService {
 						});
 					});
 				});
-			});
+			});	
 
 			let matrah;
 

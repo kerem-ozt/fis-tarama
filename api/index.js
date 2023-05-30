@@ -2,14 +2,15 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import ReceiptRouter from './routes/receipt';
+import InvoiceRouter from './routes/invoice';
 
 // const port = 3000;
 const app = express();
 
 const expressSwagger = require('express-swagger-generator')(app);
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 let options = {
 	swaggerDefinition: {
@@ -51,6 +52,7 @@ let options = {
 expressSwagger(options);
 
 app.use('/receipt', ReceiptRouter);
+app.use('/invoice', InvoiceRouter);
 
 app.listen(process.env.PORT || 3000, async () => {
 	console.log('listening');
